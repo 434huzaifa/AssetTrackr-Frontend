@@ -11,6 +11,13 @@ const RegisterCard = ({ setIsLogin }) => {
             console.log(values);
             caxios.post("company/",values).then(res=>{
                 console.log(res.data);
+                showToast("success",res.data.msg)
+            }).catch(e=>{
+                if (e?.response?.data?.msg) {
+                    showToast("error",e.response.data.msg)
+                }else{
+                    showToast("error","Something Wrong")
+                }
             })
         }else{
             showToast("error","Password Mismatch")
