@@ -8,6 +8,7 @@ import Auth from "./Auth.jsx";
 import Login from "./Login.jsx";
 import Home from "./Home.jsx";
 import AddEmployee from "./AddEmployee.jsx";
+import Device from "./Device.jsx";
 const qc = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path:"/emp",
         element:<AddEmployee/>
+      },
+      {
+        path:"/device",
+        element:<Device/>
       }
     ],
   },

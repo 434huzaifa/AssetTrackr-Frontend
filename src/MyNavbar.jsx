@@ -4,6 +4,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 import { FaHome } from "react-icons/fa";
 import { IoPersonAddSharp } from "react-icons/io5";
+import { MdDevices } from "react-icons/md";
 const MyNavbar = () => {
   const { company, loading, llogout } = useAuth();
   const location = useLocation();
@@ -18,6 +19,11 @@ const MyNavbar = () => {
       label: <NavLink to="/emp">Employee</NavLink>,
       key: "/emp",
       icon:<IoPersonAddSharp />,
+    },
+    {
+      label: <NavLink to="/device">Device</NavLink>,
+      key: "/device",
+      icon:<MdDevices />,
     },
   ];
   function loogout() {
@@ -44,7 +50,7 @@ const MyNavbar = () => {
     <div className="mt-3 mx-9 flex">
       <div className="flex justify-center items-center gap-2 border-b">
         <img src="/logo.png" className="w-10" />
-        <span className="text-lg font-semibold">AssertTrackr</span>
+        <span className="text-lg font-semibold">AssetTrackr</span>
       </div>
       <div className="flex-1">
         <Menu

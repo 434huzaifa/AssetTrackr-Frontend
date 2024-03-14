@@ -12,7 +12,7 @@ const AddEmployee = () => {
   const [form] = Form.useForm();
   const caxios = useAxios();
   const queryEmploye = useQuery({
-    queryKey: [company?.id],
+    queryKey: [company?.id,'employee'],
     queryFn: async () => {
       const res = await caxios.get(`employee/?id=${company?.id}`);
       return res.data;
@@ -37,7 +37,7 @@ const AddEmployee = () => {
   });
   const mutationDelete=useMutation({
     mutationFn:async(id)=>{
-        const res=await caxios.delete(`employee/${id}`)
+        const res=await caxios.delete(`employee/${id}/`)
         return res.data
     },
     onSuccess: (data) => {
@@ -50,7 +50,6 @@ const AddEmployee = () => {
       },
   })
   function deleteTheEmp(record) {
-    console.log(record);
     Swal.fire({
         title:"Delete",
         text:`Do you want to delete ${record.name}?`,

@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from "react";
 import useAxios from "./useAxios.js";
-import { useNavigate } from "react-router-dom";
 
 export const myContext = createContext(null);
 
