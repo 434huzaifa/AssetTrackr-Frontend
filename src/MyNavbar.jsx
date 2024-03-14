@@ -15,8 +15,8 @@ const MyNavbar = () => {
       icon: <FaHome />,
     },
     {
-      label: <NavLink to="/addemp">Add Employee</NavLink>,
-      key: "/addemp",
+      label: <NavLink to="/emp">Employee</NavLink>,
+      key: "/emp",
       icon:<IoPersonAddSharp />,
     },
   ];
