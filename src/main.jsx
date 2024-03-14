@@ -6,13 +6,22 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import Auth from "./Auth.jsx";
 import Login from "./Login.jsx";
+import Home from "./Home.jsx";
+import AddEmployee from "./AddEmployee.jsx";
 const qc = new QueryClient();
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
     children: [
-      
+      {
+        path:"/",
+        element:<Home/>
+      },
+      {
+        path:"/addemp",
+        element:<AddEmployee/>
+      }
     ],
   },
   {

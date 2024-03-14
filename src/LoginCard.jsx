@@ -1,31 +1,53 @@
-import { Button, Card, Form, Input } from "antd";
-import useAxio from "./useAxios"
+import { Button, Card, Form, Input, Spin } from "antd";
+import useAxio from "./useAxios";
 import SuccessRespons from "./SuccessRespons";
 import ErrorResponse from "./ErrorResponse";
-import useAuth from "./useAuth"
+import useAuth from "./useAuth";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
 const LoginCard = ({ setIsLogin }) => {
   const caxios = useAxio();
+  const navigate = useNavigate();
+  const { setCompany } = useAuth();
+  const mutationLogin = useMutation({
+    mutationFn: async (values) => {
+      const res = await caxios.post("company/", values);
+      return res.data;
+    },
+    onSuccess: (data) => {
+      localStorage.setItem("company", data.company.id);
+      setCompany(data.company);
+      SuccessRespons(data);
+      navigate("/");
+    },
+    onError: (err) => {
+      ErrorResponse(err);
+    },
+  });
   function ChageLoginState() {
     setIsLogin(false);
   }
-  function onFinish(values) {
-    console.log(values);
-    caxios.post("company/",values).then(res=>{
-      localStorage.setItem("company",res.data.company.id)
-      SuccessRespons(res)
-    }).catch(e=>{
-      ErrorResponse(e)
-    })
-    
+  async function onFinish(values) {
+    await mutationLogin.mutateAsync(values);
   }
   return (
-    <Card className="w-[85%]" >
+    <Card className="w-[85%]" loading={mutationLogin.isPending}>
       <p className="font-bold text-3xl text-center">Company Login Form</p>
       <Form layout="vertical" onFinish={onFinish}>
-        <Form.Item required label="Email" name="email">
+        <Form.Item
+          rules={[{ required: true }]}
+          validateTrigger="onBlur"
+          label="Email"
+          name="email"
+        >
           <Input></Input>
         </Form.Item>
-        <Form.Item required label="Password" name="password1">
+        <Form.Item
+          rules={[{ required: true }]}
+          validateTrigger="onBlur"
+          label="Password"
+          name="password1"
+        >
           <Input.Password></Input.Password>
         </Form.Item>
         <Button
@@ -36,6 +58,7 @@ const LoginCard = ({ setIsLogin }) => {
           Login
         </Button>
       </Form>
+
       <p className="text-lg font-semibold">
         if you don't have account{" "}
         <span

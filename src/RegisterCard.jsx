@@ -1,42 +1,69 @@
 import { Button, Card, Form, Input } from "antd";
-import showToast from "./showToast"
+import showToast from "./showToast";
 import useAxios from "./useAxios";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import ErrorResponse from "./ErrorResponse";
 const RegisterCard = ({ setIsLogin }) => {
-    function ChageLoginState() {
-        setIsLogin(true)
+  const navigate = useNavigate();
+  const caxios = useAxios();
+  const mutationRegister = useMutation({
+    mutationFn: async (values) => {
+      const res = await caxios.post("company/", values);
+      return res.data;
+    },
+    onSuccess: (data) => {
+      showToast("success", data.msg);
+      navigate("/login");
+    },
+    onError: (err) => {
+      ErrorResponse(err);
+    },
+  });
+  function ChageLoginState() {
+    setIsLogin(true);
+  }
+  async function onFinish(values) {
+    if (values.password1 == values.password2) {
+      await mutationRegister.mutateAsync(values);
+    } else {
+      showToast("error", "Password Mismatch");
     }
-    const caxios=useAxios()
-    function onFinish(values) {
-        if (values.password1==values.password2) {
-            console.log(values);
-            caxios.post("company/",values).then(res=>{
-                console.log(res.data);
-                showToast("success",res.data.msg)
-            }).catch(e=>{
-                if (e?.response?.data?.msg) {
-                    showToast("error",e.response.data.msg)
-                }else{
-                    showToast("error","Something Wrong")
-                }
-            })
-        }else{
-            showToast("error","Password Mismatch")
-        }
-    }
+  }
   return (
-    <Card className="w-[85%]">
+    <Card className="w-[85%]" loading={mutationRegister.isPending}>
       <p className="font-bold text-3xl text-center">Company Sign Up Form</p>
       <Form onFinish={onFinish} layout="vertical">
-      <Form.Item required  label="Title" name="title">
+        <Form.Item
+          rules={[{ required: true }]}
+          validateTrigger="onBlur"
+          label="Title"
+          name="title"
+        >
           <Input></Input>
         </Form.Item>
-        <Form.Item required  label="Email" name="email">
+        <Form.Item
+          rules={[{ required: true }]}
+          validateTrigger="onBlur"
+          label="Email"
+          name="email"
+        >
           <Input></Input>
         </Form.Item>
-        <Form.Item required  label="Password" name="password1">
+        <Form.Item
+          rules={[{ required: true }]}
+          validateTrigger="onBlur"
+          label="Password"
+          name="password1"
+        >
           <Input.Password></Input.Password>
         </Form.Item>
-        <Form.Item required  label="Confirm Password" name="password2">
+        <Form.Item
+          rules={[{ required: true }]}
+          validateTrigger="onBlur"
+          label="Confirm Password"
+          name="password2"
+        >
           <Input.Password></Input.Password>
         </Form.Item>
         <Button

@@ -1,7 +1,7 @@
 import showToast from "./showToast"
-const SuccessRespons = (res) => {
-   if (res?.data?.msg) {
-    showToast("success",res.data.msg)
+const SuccessRespons = (data) => {
+   if (data?.msg) {
+    showToast("success",data.msg)
    }else{
     showToast("success","Success")
    }
