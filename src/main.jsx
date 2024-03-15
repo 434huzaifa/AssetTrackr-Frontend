@@ -14,27 +14,47 @@ const qc = new QueryClient();
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Redirct> <App></App> </Redirct>,
+    element: (
+      <Redirct>
+        {" "}
+        <App></App>{" "}
+      </Redirct>
+    ),
     children: [
       {
-        path:"/",
-        element:<Redirct> <Home/> </Redirct>,
+        path: "/",
+        element: (
+          <Redirct>
+            {" "}
+            <Home />{" "}
+          </Redirct>
+        ),
       },
       {
-        path:"/emp",
-        element:<Redirct> <AddEmployee/></Redirct>
+        path: "/emp",
+        element: (
+          <Redirct>
+            {" "}
+            <AddEmployee />
+          </Redirct>
+        ),
       },
       {
-        path:"/device",
-        element: <Redirct> <Device/></Redirct>
-      }
+        path: "/device",
+        element: (
+          <Redirct>
+            {" "}
+            <Device />
+          </Redirct>
+        ),
+      },
     ],
   },
   {
-    path:"/login",
-    element:<Login></Login>
-  }
-])
+    path: "/login",
+    element: <Login></Login>,
+  },
+]);
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <QueryClientProvider client={qc}>
