@@ -5,8 +5,8 @@ export const myContext = createContext(null);
 
 const Auth = ({ children }) => {
   const caxios = useAxios();
-  const [company, setCompany] = useState();
-  const [loading, setLoading] = useState();
+  const [company, setCompany] = useState(null);
+  const [loading, setLoading] = useState(true);
   const llogout=()=>{
     setLoading(true)
     setCompany(false)

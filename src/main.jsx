@@ -9,23 +9,24 @@ import Login from "./Login.jsx";
 import Home from "./Home.jsx";
 import AddEmployee from "./AddEmployee.jsx";
 import Device from "./Device.jsx";
+import Redirct from "./Redirct.jsx";
 const qc = new QueryClient();
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App></App>,
+    element: <Redirct> <App></App> </Redirct>,
     children: [
       {
         path:"/",
-        element:<Home/>
+        element:<Redirct> <Home/> </Redirct>,
       },
       {
         path:"/emp",
-        element:<AddEmployee/>
+        element:<Redirct> <AddEmployee/></Redirct>
       },
       {
         path:"/device",
-        element:<Device/>
+        element: <Redirct> <Device/></Redirct>
       }
     ],
   },

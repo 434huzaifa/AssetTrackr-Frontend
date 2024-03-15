@@ -67,8 +67,8 @@ const Home = () => {
   async function onFinish(values) {
     values["promised_return"] = values.promised_return.format("DD-MM-YYYY");
     values["company"] = company?.id;
-    console.log(values);
-    await mutationCheckoutAdd.mutateAsync(values);
+        await mutationCheckoutAdd.mutateAsync(values);
+    form.resetFields()
   }
   const mutationDelete = useMutation({
     mutationFn: async (values) => {
