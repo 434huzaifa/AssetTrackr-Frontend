@@ -27,6 +27,8 @@ const Auth = ({ children }) => {
           .catch(() => {
             setLoading(false);
           });
+      }else{
+        setLoading(false);
       }
     };
     return () => {
