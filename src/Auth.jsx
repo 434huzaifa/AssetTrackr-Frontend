@@ -15,7 +15,6 @@ const Auth = ({ children }) => {
   }
   useEffect(() => {
     const unsub = () => {
-      setLoading(true);
       const id = localStorage.getItem("company");
       if (id) {
         caxios
