@@ -17,6 +17,7 @@ const Auth = ({ children }) => {
     const unsub = () => {
       const id = localStorage.getItem("company");
       if (id) {
+        setLoading(true)
         caxios
           .get(`company/?id=${id}`)
           .then((res) => {
