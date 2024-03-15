@@ -1,11 +1,9 @@
 import { Button, Card, Form, Input } from "antd";
 import showToast from "./showToast";
 import useAxios from "./useAxios";
-import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import ErrorResponse from "./ErrorResponse";
 const RegisterCard = ({ setIsLogin }) => {
-  const navigate = useNavigate();
   const caxios = useAxios();
   const mutationRegister = useMutation({
     mutationFn: async (values) => {
@@ -14,7 +12,7 @@ const RegisterCard = ({ setIsLogin }) => {
     },
     onSuccess: (data) => {
       showToast("success", data.msg);
-      navigate("/login");
+      ChageLoginState()
     },
     onError: (err) => {
       ErrorResponse(err);
