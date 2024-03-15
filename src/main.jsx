@@ -14,12 +14,7 @@ const qc = new QueryClient();
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <Redirct>
-        {" "}
-        <App></App>{" "}
-      </Redirct>
-    ),
+    element: <App></App>,
     children: [
       {
         path: "/",
